@@ -257,7 +257,7 @@ if __name__ == '__main__':
     if args.in_dataset == 'imagenet':
         args.out_datasets = ['dtd', 'sun', 'inat', 'places']
     else:
-        args.out_datasets = ['SVHN', 'LSUN', 'LSUN_resize', 'iSUN', 'dtd', 'places365']
+        args.out_datasets = ['SVHN', 'LSUN', 'LSUN_resize', 'iSUN', 'dtd']
 
     if args.method == 'energy':
         args.method_args['temperature'] = 1000.0

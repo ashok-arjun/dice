@@ -167,7 +167,9 @@ def compute_traditional_ood(base_dir, in_dataset, out_datasets, method, name):
     # print('Natural OOD')
     # print('nat_in vs. nat_out')
 
-    known = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/in_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name), delimiter='\n')
+    path = '{base_dir}/{in_dataset}/{method}/{name}'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name)
+    print(path, os.listdir('{base_dir}/{in_dataset}/{method}/{name}'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name)))
+    known = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/in_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name))
 
     known_sorted = np.sort(known)
     num_k = known.shape[0]
@@ -182,7 +184,7 @@ def compute_traditional_ood(base_dir, in_dataset, out_datasets, method, name):
     total = 0.0
 
     for out_dataset in out_datasets:
-        novel = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/{out_dataset}/out_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name, out_dataset=out_dataset), delimiter='\n')
+        novel = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/{out_dataset}/out_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name, out_dataset=out_dataset))
 
         in_cond = (novel>threshold).astype(np.float32)
         total += novel.shape[0]
@@ -200,14 +202,14 @@ def compute_stat(base_dir, in_dataset, out_datasets, method, name):
     # print('Natural OOD')
     # print('nat_in vs. nat_out')
 
-    known = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/in_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name), delimiter='\n')
+    known = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/in_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name))
 
     print(f"ID mean: {known.mean()} std: {known.std()}")
 
     all_mean = []
     all_std = []
     for out_dataset in out_datasets:
-        novel = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/{out_dataset}/out_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name, out_dataset=out_dataset), delimiter='\n')
+        novel = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/{out_dataset}/out_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name, out_dataset=out_dataset))
         all_mean.append(novel.mean())
         all_std.append(novel.std())
 
@@ -216,7 +218,7 @@ def compute_stat(base_dir, in_dataset, out_datasets, method, name):
 
 def compute_in(base_dir, in_dataset, method, name):
 
-    known_nat = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/in_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name), delimiter='\n')
+    known_nat = np.loadtxt('{base_dir}/{in_dataset}/{method}/{name}/nat/in_scores.txt'.format(base_dir=base_dir, in_dataset=in_dataset, method=method, name=name))
     known_nat_sorted = np.sort(known_nat)
     num_k = known_nat.shape[0]
 
